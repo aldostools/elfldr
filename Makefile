@@ -24,6 +24,7 @@ else
 endif
 
 CFLAGS := -Wall -Werror -O1
+LDADD  := -lSceSsl -lSceHttp
 
 all: elfldr-ps5.elf
 
@@ -41,7 +42,7 @@ bootstrap_elf.c: bootstrap.elf
 	xxd -i $^ > $@
 
 socksrv.elf: socksrv.o selfldr.o elfldr.o pt.o notify.o uri.o
-	$(CC) -o $@ $^ -lSceSsl -lSceHttp2
+	$(CC) -o $@ $^ $(LDADD)
 	$(STRIP) $@
 
 socksrv_elf.c: socksrv.elf
